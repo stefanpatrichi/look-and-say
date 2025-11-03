@@ -130,21 +130,21 @@
 \frametitle{Proprietăți de bază}
 \only<1>{
 \begin{proposition}
-    $\operatorname{Im} f = \{\beta \left|\right. \beta\in \Sigma^*, |\beta| = 2k, k\in\mathbb{N}^*\} 
-    \stackrel{\text{not}}{=} (\Sigma^2)^*$
+    % $\operatorname{Im} f = \{\beta \left|\right. \beta\in \Sigma^*, |\beta| = 2k, k\in\mathbb{N}^*\} 
+    % \stackrel{\text{not}}{=} (\Sigma^2)^*$
 \end{proposition}
 \begin{proof}
-Pentru incluziunea $\subset$: Dacă $\alpha = a_1^{n_1}a_2^{n_2}\ldots a_k^{n_k}$, atunci $f(\alpha) = n_1a_1n_2a_2\ldots n_ka_k$, deci $|f(\alpha)| = 2k$. 
+% Pentru incluziunea $\subset$: Dacă $\alpha = a_1^{n_1}a_2^{n_2}\ldots a_k^{n_k}$, atunci $f(\alpha) = n_1a_1n_2a_2\ldots n_ka_k$, deci $|f(\alpha)| = 2k$. 
 
-Pentru incluziunea $\supset$: Cuvântul $\beta = b_1b_2\ldots b_{2k}$ are inversul (unic)
-$\alpha$ = $b_2^{b_1}\ldots b_{2k}^{b_{2k-1}}$.
+% Pentru incluziunea $\supset$: Cuvântul $\beta = b_1b_2\ldots b_{2k}$ are inversul (unic)
+% $\alpha$ = $b_2^{b_1}\ldots b_{2k}^{b_{2k-1}}$.
 \end{proof}
 }
 \only<2>{
 \begin{obs}
-$g : \Sigma^* \rightarrow (\Sigma^2)^*$, $g(x) = f(x) \Rightarrow g$ bijectivă! % pt ca e inversabila (exista inversul si este unic)
+% $g : \Sigma^* \rightarrow (\Sigma^2)^*$, $g(x) = f(x) \Rightarrow g$ bijectivă! % pt ca e inversabila (exista inversul si este unic)
 \end{obs}
-Vom lucra cu funcția $g$.
+% Vom lucra cu funcția $g$.
 }
 \end{frame}
 
@@ -220,108 +220,6 @@ Rezultate:
     \caption*{\rmfamily John Conway (1937-2020)}
 \end{figure}
 \end{columns}
-\end{frame}
-
-\section{Despre ETF-uri}
-\begin{frame} 
-\frametitle{Ce este un ETF?}
-\begin{itemize}
-    \item<2-> \textit{Exchange-traded fund}
-    \item<3-> Fond de investiții listat și tranzacționat pe piețele bursiere
-    \item<4-> Adesea urmăresc un indice bursier
-    \item<5-> iShares Core S\&P 500 ETF (IVV)
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-\frametitle{Avantaje ale ETF-urilor}
-\begin{itemize}
-    \item<2-> Diversitate $\rightarrow$ Risc scăzut
-    \item<3-> Administrare pasivă, costuri administrative mici $\rightarrow$ Rată a cheltuielilor mică
-    \item<4-> Lichiditate, eficiență
-\end{itemize}
-\end{frame}
-
-\section{Cum funcționează aplicația?}
-\begin{frame}
-\frametitle{Preluarea datelor}
-\begin{itemize}
-    \item<2-> Yahoo Finance (API -- biblioteca \texttt{yfinance})
-    \item<3-> Adaptare la diferite calendare bursiere prin interpolare (biblioteca \texttt{pandas})
-    \item<4-> Trecere la euro 
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-    \frametitle{Măsurarea performanței unui portofoliu}
-\begin{itemize}
-    \item<2->$p(i, t) = $ prețul de închidere al activului $i$ la timpul (ziua) $t$.
-    \item<3->Rata rentabilității: $\displaystyle r(i, t) = \frac{p(i, t) - p(i, t-1)}{p(i, t-1)} = \frac{p(i, t)}{p(i, t-1)} - 1$.
-    \item<4->Ponderi (weights): $w(i, t) \in [0, 1]$ și $\displaystyle \sum_i w(i,t) = 1$ (prezise de rețeaua neuronală).
-    \item<5->Portofoliul realizat: $\displaystyle R(t) = \sum_i w(i,t)\cdot r(i,t)$.
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-\frametitle{Raportul Sharpe}
- \begin{itemize}
-    \item<2-> raportează performanța netă a portofoliului la riscul asumat \\($\approx$ abaterea standard)
-    \only<3>{\item $\displaystyle L = \frac{\E[R(t)]}{\sigma} = \frac{\E[R(t)]}{\sqrt{\E[R^2(t)] - \E[R(t)]^2}}$}
-    \only<4>{\item $\displaystyle L = \frac{\E[R(t)]}{\sigma} = \frac{\E[R(t)]}{\sqrt{\E[R^2(t)] - \E[R(t)]^2}} \cdot \sqrt{252}$}
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-\frametitle{Softmax}
-\begin{itemize}
-    \item<1-> Modelul returnează ponderile care maximizează raportul Sharpe ($L$).
-    \item<2-> Nu satisfac neapărat $w(i, t) \ge 0$ și $\displaystyle \sum_i w(i,t) = 1$!
-    \item<3-> $\displaystyle \operatorname{softmax}(w(i, t)) = \frac{e^{w(i, t)}}{\sum\limits_{j=1}^n e^{w(j, t)}}$.
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-\frametitle{Rețeaua neuronală}
-\begin{itemize}
-    \item<2-> 3 straturi:
-    \begin{itemize}
-        \item<3-> LSTM (32 neuroni, dropout: 0,2)
-        \item<4-> Flatten
-        \item<5-> Dense (Softmax)
-    \end{itemize}
-    \item<6-> Window-uri de câte 200 zile
-    \item<7-> 80\% train, 20\% test
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-\frametitle{Comunicare frontend -- backend}
-\begin{itemize}
-    \item<1-> API scris în biblioteca \texttt{fastapi}
-    \item<2-> \texttt{index.html/process}
-    \item<3-> \texttt{index.html/get\_etfs}
-    \item<4-> \texttt{index.html/get\_etf\_history?etf=EPOL}
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-\frametitle{Pagina web}
-\begin{itemize}
-    \item Grafice interactive în \texttt{plotly}
-\end{itemize}
-\end{frame}
-
-\section{Limitări, posibilități de dezvoltare}
-\begin{frame}
-\frametitle{Limitări, posibilități de dezvoltare}
-\begin{itemize}
-    \item<1-> Anualizarea raportului Sharpe
-    \item<2-> Mai multe ETF-uri listate la aceeași bursă
-    \item<3-> Dezvoltare UI (ex. dropdown)
-    \item<4-> Formulă alternativă pentru portofoliul realizat (volatilitate!) \\
-    $\displaystyle R(t) = \sum_i \frac{\sigma_{tgt}}{\sigma(i,t-1)}w(i,t-1)\cdot r(i,t) 
-    - C \cdot\sum_i\left|\frac{\sigma_{tgt}}{\sigma(i,t-1)}w(i,t-1) - \frac{\sigma_{tgt}}{\sigma(i,t-2)}w(i,t-2)\right|$
-\end{itemize}
 \end{frame}
 
 \section{Vă mulțumim!}
