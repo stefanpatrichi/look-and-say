@@ -1,0 +1,5 @@
+\babel@toc {romanian}{}\relax 
+\beamer@sectionintoc {1}{Despre ETF-uri}{24}{0}{1}
+\beamer@sectionintoc {2}{Cum funcționează aplicația?}{34}{0}{2}
+\beamer@sectionintoc {3}{Limitări, posibilități de dezvoltare}{63}{0}{3}
+\beamer@sectionintoc {4}{Vă mulțumim!}{68}{0}{4}
