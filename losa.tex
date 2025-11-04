@@ -7,6 +7,7 @@
 \usepackage[center]{caption}
 \usepackage{float}
 \usepackage{amsmath, amssymb}
+\usepackage{enumitem}
 \usepackage{mathtools}
 \usepackage[T1]{fontenc}
 \usepackage{ragged2e}
@@ -31,7 +32,10 @@
   \end{frame}
 }
 
-\newcommand{\E}{\mathbb{E}}
+\setlist[enumerate]{label=(\alph*), leftmargin=1.3cm}
+\setlist[itemize,1]{label=\usebeamertemplate{itemize item}}
+\setlist[itemize,2]{label=\usebeamertemplate{itemize subitem}}
+\setlist[itemize,3]{label=\usebeamertemplate{itemize subsubitem}}
 
 % \setbeamertemplate{items}[triangle]
 
@@ -99,7 +103,7 @@
         % notatie multiplicativa pt operatia de concatenare
         \item<1-> Alfabet: $\Sigma = \{1, 2, 3, 4, 5, 6, 7, 8, 9\}$
         \item<2-> Cuvânt: $\alpha = a_1a_2\ldots a_k$ cu $a_i \in \Sigma$
-        \item<3-> Mulțimea cuvintelor: $\Sigma^* = \{a_1a_2\ldots a_k \mid a_i \in \Sigma, k \in \mathbb{N}^*\}$
+        \item<3-> Mulțimea cuvintelor: \\${\Sigma^* = \{a_1a_2\ldots a_k \mid a_i \in \Sigma, k \in \mathbb{N}\}}$
         \item<4-> Lungimea cuvântului: $|\alpha| = k$
         \item<5-> Concatenarea: $\alpha = a_1a_2\ldots a_k$, $\beta = b_1b_2\ldots b_l$\\
         Atunci $\alpha\cdot\beta = \alpha\beta = a_1a_2\ldots a_kb_1b_2\ldots b_l$
@@ -113,51 +117,100 @@
     \item<1-> Notație: $\displaystyle \underbrace{aa\ldots a}_{\text{de $m$ ori}}\underbrace{bb\ldots b}_{\text{de $n$ ori}} = a^m b^n$
     \item<2-> $a^ma^n = a^{m+n}$
     \item<3-> Exemplu: $111221 = 1^3 2^2 1^1$ \only<3-> {$\rightarrow 312211$}
-
+    \item<4-> Exemplu: $3333333333 = 3^{10}$ \only<5-> {$\rightarrow 103$} % nu e ok, definim acum unde e ok
 \end{itemize}
+\end{frame}
+
+\begin{frame}{Terminologie}
+\only<1>{
+    \begin{definition}
+        \rmfamily
+        Un șir care evoluează după regula descrisă anterior se numește \textit{șir look-and-say} (\textit{privește-și-spune}).
+    \end{definition}
+    \begin{definition}
+        \rmfamily
+        Primul termen al unui șir look-and-say se numește \textit{origine}.
+    \end{definition}
+}
+\only<2>{
+    \begin{definition}
+        \rmfamily
+        Un șir look-and-say a cărui origine nu conține nicio înșiruire de mai mult de $9$ cifre identice adiacente se numește \textit{șir compact}.
+    \end{definition}
+    \begin{definition}
+        \rmfamily
+        Notăm cu $\mathcal{C} \subset \Sigma^*$ mulțimea tuturor cuvintelor care apar în șiruri compacte, excluzând originea.
+    \end{definition}
+}
+% eu am ales un nume in directia audio... spre deosebire de conway (cel care a studiat sirul), care a optat pentru o analogie cu chimia, si vom vedea imediat de ce
+\only<3>{
+    \begin{definition}
+        \rmfamily
+        Un șir look-and-say a cărui origine:
+        \begin{enumerate}
+            \item nu conține nicio cifră mai mare decât $3$ și
+            \item nu conține nicio înșiruire de mai mult de $3$ cifre identice adiacente
+        \end{enumerate}
+        se numește \textit{șir armonic}. % aici principalul exemplu de sir cu care vom lucra este cel cu s_0 = 1
+    \end{definition}
+    \begin{definition}
+        \rmfamily
+        Notăm cu $\mathcal{A} \subset \mathcal{C} \subset \Sigma^*$ mulțimea tuturor cuvintelor care apar în șiruri armonice, excluzând originea.
+    \end{definition}
+}
 \end{frame}
 
 \begin{frame}
     \frametitle{Funcția de tranziție}
     \begin{itemize}
-        \item<1-> $f : \Sigma^* \rightarrow \Sigma^*$, $\boxed{f(a_1^{n_1}a_2^{n_2}\ldots a_k^{n_k}) = n_1 a_1 n_2 a_2 \ldots n_k a_k}$
+        \item<1-> $f : \mathcal{C} \rightarrow \mathcal{C}$, $\boxed{f(a_1^{n_1}a_2^{n_2}\ldots a_k^{n_k}) = n_1 a_1 n_2 a_2 \ldots n_k a_k}$ % stim ca n-urile sunt toate cifre nenule
         \item<2-> Condiție: \textcolor{red}{$a_i \ne a_{i+1}$} $\left(a_i^m a_i^n = a_i^{m+n}\right)$
-
-    \end{itemize}
-\end{frame}
-
-\begin{frame}{Șirul look-and-say $(s_n)_{n\ge 1}$}
-    \begin{itemize}
-        \item<1-> $s_0$ se numește \textit{seed}
-        \item<2-> $s_{n+1} = f(s_n)$
+        \item<3-> $f(777777) = 67$, nu $2747$ sau $5717$.
     \end{itemize}
 \end{frame}
 
 \begin{frame}
 \frametitle{Proprietăți de bază}
-\only<1>{
-\begin{proposition}
-    % $\operatorname{Im} f = \{\beta \left|\right. \beta\in \Sigma^*, |\beta| = 2k, k\in\mathbb{N}^*\} 
-    % \stackrel{\text{not}}{=} (\Sigma^2)^*$
-\end{proposition}
-\begin{proof}
-% Pentru incluziunea $\subset$: Dacă $\alpha = a_1^{n_1}a_2^{n_2}\ldots a_k^{n_k}$, atunci $f(\alpha) = n_1a_1n_2a_2\ldots n_ka_k$, deci $|f(\alpha)| = 2k$. 
-
-% Pentru incluziunea $\supset$: Cuvântul $\beta = b_1b_2\ldots b_{2k}$ are inversul (unic)
-% $\alpha$ = $b_2^{b_1}\ldots b_{2k}^{b_{2k-1}}$.
-\end{proof}
+\only<1-3>{
+    \normalsize
+    \onslide<1->{
+        \begin{proposition}
+            \rmfamily
+        Mulțimea $\mathcal{C}$ coincide cu mulțimea cuvintelor $a_1a_2\ldots a_k$ pentru care:
+        \begin{enumerate}
+            \item $2 \mid k$,
+            \item $a_{2i} \ne a_{2i+2}$.
+        \end{enumerate}
+        \end{proposition}
+    }
+    \onslide<2->{
+        \begin{proof}
+            Pentru incluziunea $\supset$, fie $a_1b_1a_2b_2\ldots a_kb_k$ un cuvânt astfel încât $b_i \ne b_{i+1}$. Atunci putem să-i construim inversul, $b_1^{a_1}b_2^{a_2}\ldots b_k^{a_k}$.
+        \end{proof}
+    }
+    \onslide<3->{
+        \begin{obs}
+        \rmfamily
+        Am demonstrat că funcția $f$ este bijectivă!
+        \end{obs}
+    }
 }
-\only<2>{
-\begin{obs}
-% $g : \Sigma^* \rightarrow (\Sigma^2)^*$, $g(x) = f(x) \Rightarrow g$ bijectivă! % pt ca e inversabila (exista inversul si este unic)
-\end{obs}
-% Vom lucra cu funcția $g$.
+\only<4>{
+\begin{proposition}
+\rmfamily
+Mulțimea $\mathcal{A}$ coincide cu mulțimea cuvintelor $a_1a_2\ldots a_k$ pentru care:
+\begin{enumerate}
+    \item $2 \mid k$,
+    \item $a_{2i} \ne a_{2i+2}$ și
+    \item $a_i \in \{1,2,3\}$.
+\end{enumerate}
+\end{proposition}% Vom lucra cu funcția $g$.
 }
 \end{frame}
 
 
 \begin{frame}
-\frametitle{Descompunerea}
+\frametitle{Proprietăți de bază -- Descompunerea}
 
 \only<1>{
 \centering
@@ -205,9 +258,9 @@ for tree={
 
 \only<3->{
 \begin{itemize}
-    \item<3-> $f^n(LR) = f^n(L)f^n(R)$
-    \item<4-> Ultima cifră a lui $L_n \ne$ prima cifră a lui $R_n$, $\forall n \ge n_0$.
-    \item<5-> Notație: $z = x.y$ %adica z se imparte in x si y
+    \item<3-> $f^n(LR) = f^n(L)f^n(R)$ % iterata
+    \item<4-> Ultima cifră a lui $f^n(L) \ne$ prima cifră a lui $f^n(R)$, pentru $\forall n \ge n_0$.
+    % \item<5-> Notație: $z = x.y$ %adica z se imparte in x si y
 \end{itemize}
 }
 \end{frame}
@@ -220,7 +273,7 @@ Rezultate:
 \begin{itemize}
     \item<only@1> Modul în care se repetă începutul și sfârșitul numerelor dintr-un șir look-and-say
     \item<only@2> Condiții necesare și suficiente pentru descompunere
-    \item<only@3> Teoremă: \textbf{Există 92 de \textit{elemente atomice} astfel încât orice \textit{seed} se descompune eventual într-o succesiune de elemente atomice}
+    \item<only@3> Teoremă: \textbf{Există 92 de \textit{elemente atomice} astfel încât orice origine se descompune eventual într-o succesiune de elemente atomice}
     \item<only@4> Rata asimptotică de creștere a lungimii numerelor dintr-un șir look-and-say
 \end{itemize}
 \column{0.4\textwidth}
