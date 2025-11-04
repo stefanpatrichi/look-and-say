@@ -126,6 +126,13 @@
     \end{itemize}
 \end{frame}
 
+\begin{frame}{Șirul look-and-say $(s_n)_{n\ge 1}$}
+    \begin{itemize}
+        \item<1-> $s_0$ se numește \textit{seed}
+        \item<2-> $s_{n+1} = f(s_n)$
+    \end{itemize}
+\end{frame}
+
 \begin{frame}
 \frametitle{Proprietăți de bază}
 \only<1>{
@@ -208,15 +215,18 @@ for tree={
 \begin{frame}
 \frametitle{Istoric}
 \begin{columns}
-\column{0.5\textwidth}
+\column{0.6\textwidth}
 Rezultate:
 \begin{itemize}
-    \item<1->
+    \item<only@1> Modul în care se repetă începutul și sfârșitul numerelor dintr-un șir look-and-say
+    \item<only@2> Condiții necesare și suficiente pentru descompunere
+    \item<only@3> Teoremă: \textbf{Există 92 de \textit{elemente atomice} astfel încât orice \textit{seed} se descompune eventual într-o succesiune de elemente atomice}
+    \item<only@4> Rata asimptotică de creștere a lungimii numerelor dintr-un șir look-and-say
 \end{itemize}
-\column{0.5\textwidth}
+\column{0.4\textwidth}
 \centering
 \begin{figure}
-    \includegraphics[scale=0.12]{images/conway.jpg}
+    \includegraphics[scale=0.105]{images/conway.jpg}
     \caption*{\rmfamily John Conway (1937-2020)}
 \end{figure}
 \end{columns}
