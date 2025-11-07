@@ -12,6 +12,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{ragged2e}
 \usepackage[edges]{forest}
+\usepackage{expl3}
 
 \theoremstyle{definition}
 \newtheorem*{obs}{Observație.}
@@ -103,11 +104,12 @@
         % notatie multiplicativa pt operatia de concatenare
         \item<1-> Alfabet: $\Sigma = \{1, 2, 3, 4, 5, 6, 7, 8, 9\}$
         \item<2-> Cuvânt: $\alpha = a_1a_2\ldots a_k$ cu $a_i \in \Sigma$
-        \item<3-> Mulțimea cuvintelor: \\${\Sigma^* = \{a_1a_2\ldots a_k \mid a_i \in \Sigma, k \in \mathbb{N}\}}$
-        \item<4-> Lungimea cuvântului: $|\alpha| = k$
-        \item<5-> Concatenarea: $\alpha = a_1a_2\ldots a_k$, $\beta = b_1b_2\ldots b_l$\\
+        \item<3-> Lungimea cuvântului: $|\alpha| = k$
+        \item<4-> Concatenarea: $\alpha = a_1a_2\ldots a_k$, $\beta = b_1b_2\ldots b_l$\\
         Atunci $\alpha\cdot\beta = \alpha\beta = a_1a_2\ldots a_kb_1b_2\ldots b_l$
-        \item<6-> $(\Sigma^*, \cdot)$ = \textbf{monoidul liber} generat de mulțimea $\Sigma$
+        \item<5-> Cuvânt vid: $\varepsilon$ cu $|\varepsilon| = 0$ și $\alpha\varepsilon = \varepsilon\alpha = \alpha \ \forall\alpha$
+        \item<6-> Mulțimea cuvintelor: \\${\Sigma^* = \{a_1a_2\ldots a_k \mid a_i \in \Sigma, k \in \mathbb{N}\}}$
+        \item<7-> $(\Sigma^*, \cdot)$ = \textbf{monoidul liber} generat de mulțimea $\Sigma$
     \end{itemize}
 \end{frame}
 
@@ -117,7 +119,7 @@
     \item<1-> Notație: $\displaystyle \underbrace{aa\ldots a}_{\text{de $m$ ori}}\underbrace{bb\ldots b}_{\text{de $n$ ori}} = a^m b^n$
     \item<2-> $a^ma^n = a^{m+n}$
     \item<3-> Exemplu: $111221 = 1^3 2^2 1^1$ \only<3-> {$\rightarrow 312211$}
-    \item<4-> Exemplu: $3333333333 = 3^{10}$ \only<5-> {$\rightarrow 103$} % nu e ok, definim acum unde e ok
+    \item<4-> Exemplu: $3333333333 = 3^{10}$ \only<4-> {$\rightarrow 103$} % nu e ok, definim acum unde e ok
 \end{itemize}
 \end{frame}
 
@@ -163,9 +165,9 @@
 \begin{frame}
     \frametitle{Funcția de tranziție}
     \begin{itemize}
-        \item<1-> $f : \mathcal{C} \rightarrow \mathcal{C}$, $\boxed{f(a_1^{n_1}a_2^{n_2}\ldots a_k^{n_k}) = n_1 a_1 n_2 a_2 \ldots n_k a_k}$ % stim ca n-urile sunt toate cifre nenule
+        \item<1-> $LS : \mathcal{C} \rightarrow \mathcal{C}$, $\boxed{LS(a_1^{n_1}a_2^{n_2}\ldots a_k^{n_k}) = n_1 a_1 n_2 a_2 \ldots n_k a_k}$ % stim ca n-urile sunt toate cifre nenule
         \item<2-> Condiție: \textcolor{red}{$a_i \ne a_{i+1}$} $\left(a_i^m a_i^n = a_i^{m+n}\right)$
-        \item<3-> $f(777777) = 67$, nu $2747$ sau $5717$.
+        \item<3-> $LS(777777) = 67$, nu $2747$ sau $5717$.
     \end{itemize}
 \end{frame}
 
@@ -258,9 +260,14 @@ for tree={
 
 \only<3->{
 \begin{itemize}
-    \item<3-> $f^n(LR) = f^n(L)f^n(R)$ % iterata
-    \item<4-> Ultima cifră a lui $f^n(L) \ne$ prima cifră a lui $f^n(R)$, pentru $\forall n \ge n_0$.
+    \item<3-> $LS^n(S \cdot D) = LS^n(S)\cdot LS^n(D)$ % iterata
+    \item<4-> Ultima cifră a lui $LS^n(S) \ne$ prima cifră a lui $LS^n(D)$, pentru $\forall n \ge n_0$.
     % \item<5-> Notație: $z = x.y$ %adica z se imparte in x si y
+    \item<5-> Dacă $y$ se descompune în $x_1$, $x_2$, \ldots, $x_k$, atunci:
+    \begin{align*}
+        \onslide<5->{LS^n(y) &= \prod_{k=1}^n LS^n(x_k)}
+        \onslide<6->{\\ |LS^n(y)| &= \sum_{k=1}^n |LS^n(x_k)|}
+    \end{align*}
 \end{itemize}
 }
 \end{frame}
@@ -273,8 +280,8 @@ Rezultate:
 \begin{itemize}
     \item<only@1> Modul în care se repetă începutul și sfârșitul numerelor dintr-un șir look-and-say
     \item<only@2> Condiții necesare și suficiente pentru descompunere
-    \item<only@3> Teoremă: \textbf{Există 92 de \textit{elemente atomice} astfel încât orice origine se descompune eventual într-o succesiune de elemente atomice}
-    \item<only@4> Rata asimptotică de creștere a lungimii numerelor dintr-un șir look-and-say
+    \item<only@3> Teoremă: \textbf{Există 92 de \textit{elemente atomice} astfel încât orice origine se descompune eventual într-o succesiune de elemente atomice} % garantat de la al 8 lea incolo % restul sunt compusi
+    \item<only@4> \textbf{Rata asimptotică de creștere a lungimii numerelor dintr-un șir look-and-say}, \\\vspace{2mm}${\displaystyle \lambda = \lim_{n\to\infty}\frac{|s_{n+1}|}{|s_n|}}$
 \end{itemize}
 \column{0.4\textwidth}
 \centering
@@ -285,5 +292,204 @@ Rezultate:
 \end{columns}
 \end{frame}
 
+\begin{frame}{Metodă de calcul pentru $\lambda$}
+    \only<1-3>{
+        \begin{columns}
+            \column{0.5\textwidth}
+                \begin{itemize}
+                    \item<1-> $e_i$ = cele $d$ elemente atomice
+                    \item<2-> $t_{ij}$ = de câte ori apare $e_i$ în regula de evoluție a lui $e_j$ % adica descompunerea lui $LS(e_j)$
+                    \item<3-> $f_i$ = de câte ori apare $e_i$ în descompunerea originii șirului
+                \end{itemize}
+            \column{0.5\textwidth}
+                \centering
+                \begin{figure}
+                    \includegraphics[scale=0.24]{images/periodic_table.png}
+                    \caption*{\rmfamily Fragment din \textit{Tabelul periodic} al celor $d = 92$ elemente}
+                \end{figure}
+        \end{columns}
+    }
+    \only<4-10>{
+        \begin{itemize}
+            \item<4-> Fie $n_0$ astfel încât $LS^{n_0}(s_0) = s_{n_0}$ se descompune în elemente atomice.
+            \onslide<5->{\begin{align*}
+             |s_{n_0+1}| &= \sum_{i = 1}^{d} (\text{nr. apariții $e_i$ în $LS(s_{n_0})$}) \cdot |e_i|
+             \only<6>{\\ &=  \sum_{i = 1}^{d} \left(\sum_{j=1}^d t_{ij}f_j\right) \cdot |e_i| }
+             \only<7-8>{\\ &=  \sum_{i = 1}^{d} \left(\textcolor{red}{\sum_{j=1}^d t_{ij}f_j}\right) \cdot |e_i| }
+             \only<9->{\\ &= (\mathbf{Tf}) \cdot \mathbf{l} = \mathbf{l}^\top(\mathbf{Tf})}
+            \end{align*}
+            \vspace{-4mm}
+             \only<8-9>{
+             \begin{columns}
+                \column{0.25\textwidth}
+                    \begin{align*}
+                        \mathbf{T} = 
+                        \begin{pmatrix}
+                            t_{11} & t_{12} & \cdots & t_{1d} \\
+                            t_{21} & t_{22} & \cdots & t_{2d} \\
+                            \vdots & \vdots & \ddots & \vdots \\
+                            t_{d1} & t_{d2} & \cdots & t_{dd} \\
+                        \end{pmatrix}
+                    \end{align*}
+                \column{0.25\textwidth}
+                    \begin{align*}
+                        \mathbf{f} = \begin{pmatrix}
+                            f_1 \\ f_2 \\ \vdots \\ f_d
+                        \end{pmatrix}
+                    \end{align*}
+                \column{0.25\textwidth}
+                    \begin{align*}
+                        \mathbf{l} = \begin{pmatrix}
+                            |e_1| \\ |e_2| \\ \vdots \\ |e_d|
+                        \end{pmatrix}
+                    \end{align*}
+             \end{columns}
+             }
+            }
+            \item<10->{Analog, \begin{align*}
+                |s_{n_0+k}| = (\mathbf{T}^k \mathbf{f}) \cdot \mathbf{l} = \mathbf{l}^\top(\mathbf{T}^k \mathbf{f})
+            \end{align*}} % T - matricea de tranzitie
+        \end{itemize}
+    }
+    \only<11-15>{
+        \begin{itemize}
+            \item<11-> $\lambda_i$, $\mathbf{v}_i$ = valori/vectori proprii ai matricei $\mathbf{T}$ % toti, nu doar cei asociati lui lambda
+            \item<12-> $\lambda_p$, $\mathbf{v}_p$ = valoare/vector propriu Perron a matricei $\mathbf{T}$
+            \item<13-> Pentru simplitate, $n_0 = 0$.
+            \item<14-> Când $\mathbf{T}$ e diagonalizabilă,
+            \begin{align*}
+                \frac{1}{\lambda^n}\mathbf{T}^n\mathbf{f} &= \frac{1}{\lambda^n}\mathbf{T}^n\sum_{i=1}^{d}\alpha_i\mathbf{v}_i
+                \onslide<14->{\\ &= \sum_{i=1}^{d}\alpha_i\left(\frac{\lambda_i}{\lambda}\right)^n\mathbf{v}_i}
+                \onslide<15->{ \rightarrow \alpha_p \mathbf{v}_p}
+            \end{align*} 
+        \end{itemize}
+    }
+    \only<16->{
+        \begin{itemize}
+            \item<16-> Acum, 
+            \begin{align*}
+                \only<16>{\lim_{n\to\infty}\frac{|s_{n+1}|}{|s_n|} = \lim_{n\to\infty}\lambda_p\frac{\displaystyle\frac{1}{\lambda_p^{n+1}}\mathbf{T}^{n+1}\mathbf{f} \cdot \mathbf{l}}
+                {\displaystyle\frac{1}{\lambda_p^{n}}\mathbf{T}^{n}\mathbf{f} \cdot \mathbf{l}}}
+                \onslide<17->{\lim_{n\to\infty}\frac{|s_{n+1}|}{|s_n|} &= \lim_{n\to\infty}\lambda_p\frac{\textcolor{red}{\displaystyle\frac{1}{\lambda_p^{n+1}}\mathbf{T}^{n+1}\mathbf{f}} \cdot \mathbf{l}}
+                {\displaystyle \textcolor{red}{\frac{1}{\lambda_p^{n}}\mathbf{T}^{n}\mathbf{f}} \cdot \mathbf{l}}}
+                \onslide<18->{\\ &= \lambda_p\frac{\alpha_p \mathbf{v}_p \cdot \mathbf{l}}{\alpha_p \mathbf{v}_p \cdot \mathbf{l}} \\ &= \lambda_p \approx 1.303577269034\ldots}
+            \end{align*}
+        \end{itemize}
+    }
+\end{frame}
+
+\section{Varianțiuni de șiruri look-and-say} % lucram cu primul termen mereu 1
+\begin{frame}{Varianțiuni de șiruri look-and-say}
+    \begin{itemize}
+        \item $LS$ cu nr. de apariții postpus ($LS_{\texttt{post}}$)
+        \begin{align*}
+            LS_{\texttt{post}}(a_1^{n_1}a_2^{n_2}\ldots a_k^{n_k}) = a_1 n_1 a_2 n_2 \ldots a_k n_k
+        \end{align*}
+        \item $LS$ în baza 2 ($LS_{\texttt{b2}}$) % avand in vedere ca in \mathcal{A} avem doar cifre de 1,2,3 are rost sa ne uitam doar la bazele 2 si 3
+        \item $LS$ cu cifre romane ($LS_{\texttt{roman}}$)
+        \item $LS$ cu suprimarea cifrelor \textit{singure} ($LS_{\texttt{sng}}$)
+        \begin{align*}
+            LS_{\texttt{sng}}(a_1^{n_1}a_2^{n_2}\ldots a_k^{n_k}) = m_1 a_1 m_2 a_2 \ldots m_k a_k,
+        \end{align*}
+        unde:
+        \begin{align*}
+            m_i = \begin{cases}
+            \varepsilon, & n_i = 1 \\
+            n_i, &n_i \ge 2
+            \end{cases}
+        \end{align*}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Probleme de investigat}
+    \begin{itemize}
+        \item Elemente atomice
+        \item Puncte fixe (de ex. $\varepsilon$ și $22$ pentru $LS$-ul obișnuit)
+        \item Rata asimptotică de creștere a lungimii cuvintelor ($\lambda$)
+        \item Stabilizarea (șirul $(s_n)$ constant de la un rang încolo)
+        \item Alte proprietăți specifice (regularități/ciclicități)
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{$LS_{\texttt{post}}$}
+    \only<1-2>{
+    \begin{align*}
+    LS&: 1, 11, 21, 1211, 111221, 312211, 13112221, \ldots \\
+    LS_{\texttt{post}}&: 1, 11, 12, 1121, 122111, 112213, 12221131\ldots
+    \end{align*}
+    \onslide<2>{
+        \begin{theorem}
+            \rmfamily
+            $LS_{\texttt{post}}^n(s_0) = R(LS^n(s_0))$, unde $R : \mathcal{C} \to \mathcal{C}$ este operatorul de \textit{răsturnare} a cuvintelor.
+        \end{theorem}
+    }
+    }
+    \only<3>{
+        \centering
+        \includegraphics[scale=0.33]{images/proof11.png}
+    }
+    \only<4>{
+        \centering
+        \includegraphics[scale=0.35]{images/proof12.png} % gemini similar, putin mai intuitiv, mai lung
+    }
+\end{frame}
+
+\begin{frame}{$LS_{\texttt{b2}}$}
+\only<1>{$LS_{\texttt{b2}}: 1, 11, 101, 111011, 11110101, 100110111011$}
+% sunt 13 elemente atomice, chatgpt gaseste site ul lui johnston cu 10 pe net
+% gemini halucineaza, da o lucrare inexistenta (cu 15 elemente atomice), intreb care lucrare, se redreseaza, mentioneaza lucrarea lui silke (11) si site ul lui njohnston gasit si de chatgpt
+\only<2>{
+    \centering
+    \includegraphics[scale=0.4]{images/proof21.png} % corectez % inegalitate in loc de egalitate la log, faptul ca incepe mereu cu 1 deci blocurile vor fi 1 0 1 0 etc., faptul ca nu trb sa continue cu bloc de 0
+}
+\end{frame}
+
+\begin{frame}{$LS_{\texttt{roman}}$}
+\only<1>{% in primul rand numerele nu sunt numere valide cu cifre romane
+    \begin{enumerate}[label=\arabic*.]
+        \item i
+        \item ii
+        \item iii
+        \item iiii
+        \item ivi
+        \item iiivii
+        \item iiiiiviii
+        \item viiviiii
+        \item iviiiivivi
+        \item iiiviviiviiivii
+        \item iiiiiviiiviiiiviiiiiviii
+        \item viiviiiiiviviivviiviiii
+    \end{enumerate}
+}
+\only<2>{
+      \begin{enumerate}[label=\arabic*.]
+        \item i
+        \item ii
+        \item iii
+        \item iiii
+        \item \textcolor{red}{i}vi
+        \item \textcolor{red}{iii}vii
+        \item \textcolor{red}{iiiii}viii
+        \item \textcolor{red}{}viiviiii
+        \item \textcolor{red}{i}viiiivivi
+        \item \textcolor{red}{iii}viviiviiivii
+        \item \textcolor{red}{iiiii}viiiviiiiviiiiiviii
+        \item \textcolor{red}{}viiviiiiiviviivviiviiii
+    \end{enumerate}
+}
+\only<3>{
+    \begin{tabular}{rl}
+    1. &i\\
+    5. &ivi\\
+    9. &iviiiiviii\\
+    13. &iviiiivviiviiiviiiiviiiiiviii\\
+    17. &iviiiivviiiviiiiviiiiivviivviiviiiviiiivviiviiiviiiiiviiiivivi\\
+    21. &iviiiivviiiviiiiiviviivviiiviiiiiviiiiiviviiviiiiivviiviviivv\ldots\\
+    25. &iviiiivviiiviiiiivviiviiiviiiiiviiiiivviivviiiviiiiviiiviiiii\ldots\\
+    29. &iviiiivviiiviiiiivviiiviiiiviiiiivviivviiiviiiiiviiiiivviiviv\ldots\\
+    33. &iviiiivviiiviiiiivviiiviiiiiviviivviiiviiiiiviiiiivviivviiivi\ldots\\
+    \end{tabular}
+}
+\end{frame}
 \section{Vă mulțumim!}
 \end{document}
