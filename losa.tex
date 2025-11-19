@@ -102,14 +102,14 @@
         % nu lucram cu numere, ci cu cuvinte
         % notiunea de alfabet, cuvant, concatenare
         % notatie multiplicativa pt operatia de concatenare
-        \item<1-> Alfabet: $\Sigma = \{1, 2, 3, 4, 5, 6, 7, 8, 9\}$
-        \item<2-> Cuvânt: $\alpha = a_1a_2\ldots a_k$ cu $a_i \in \Sigma$
-        \item<3-> Lungimea cuvântului: $|\alpha| = k$
-        \item<4-> Concatenarea: $\alpha = a_1a_2\ldots a_k$, $\beta = b_1b_2\ldots b_l$\\
+        \item Alfabet: $\Sigma = \{1, 2, 3, 4, 5, 6, 7, 8, 9\}$
+        \item Cuvânt: $\alpha = a_1a_2\ldots a_k$ cu $a_i \in \Sigma$
+        \item Lungimea cuvântului: $|\alpha| = k$
+        \item Concatenarea: $\alpha = a_1a_2\ldots a_k$, $\beta = b_1b_2\ldots b_l$\\
         Atunci $\alpha\cdot\beta = \alpha\beta = a_1a_2\ldots a_kb_1b_2\ldots b_l$
-        \item<5-> Cuvânt vid: $\varepsilon$ cu $|\varepsilon| = 0$ și $\alpha\varepsilon = \varepsilon\alpha = \alpha \ \forall\alpha$
-        \item<6-> Mulțimea cuvintelor: \\${\Sigma^* = \{a_1a_2\ldots a_k \mid a_i \in \Sigma, k \in \mathbb{N}\}}$
-        \item<7-> $(\Sigma^*, \cdot)$ = \textbf{monoidul liber} generat de mulțimea $\Sigma$
+        \item Cuvânt vid: $\varepsilon$ cu $|\varepsilon| = 0$ și $\alpha\varepsilon = \varepsilon\alpha = \alpha \ \forall\alpha$
+        \item Mulțimea cuvintelor: \\${\Sigma^* = \{a_1a_2\ldots a_k \mid a_i \in \Sigma, k \in \mathbb{N}\}}$
+        \item $(\Sigma^*, \cdot)$ = \textbf{monoidul liber} generat de mulțimea $\Sigma$
     \end{itemize}
 \end{frame}
 
@@ -117,9 +117,9 @@
 \frametitle{Convenții pentru notația multiplicativă}
 \begin{itemize}
     \item<1-> Notație: $\displaystyle \underbrace{aa\ldots a}_{\text{de $m$ ori}}\underbrace{bb\ldots b}_{\text{de $n$ ori}} = a^m b^n$
-    \item<2-> $a^ma^n = a^{m+n}$
-    \item<3-> Exemplu: $111221 = 1^3 2^2 1^1$ \only<3-> {$\rightarrow 312211$}
-    \item<4-> Exemplu: $3333333333 = 3^{10}$ \only<4-> {$\rightarrow 103$} % nu e ok, definim acum unde e ok
+    \item<1-> $a^ma^n = a^{m+n}$
+    \item<2-> Exemplu: $111221 = 1^3 2^2 1^1$ $\rightarrow 312211$
+    \item<2-> Exemplu: $33333333333 = 3^{11}$ $\rightarrow 113$ % nu e ok, definim acum unde e ok
 \end{itemize}
 \end{frame}
 
@@ -167,13 +167,13 @@
     \begin{itemize}
         \item<1-> $LS : \mathcal{C} \rightarrow \mathcal{C}$, $\boxed{LS(a_1^{n_1}a_2^{n_2}\ldots a_k^{n_k}) = n_1 a_1 n_2 a_2 \ldots n_k a_k}$ % stim ca n-urile sunt toate cifre nenule
         \item<2-> Condiție: \textcolor{red}{$a_i \ne a_{i+1}$} $\left(a_i^m a_i^n = a_i^{m+n}\right)$
-        \item<3-> $LS(777777) = 67$, nu $2747$ sau $5717$.
+        \item<2-> $LS(777777) = 67$, nu $2747$ sau $5717$.
     \end{itemize}
 \end{frame}
 
 \begin{frame}
 \frametitle{Proprietăți de bază}
-\only<1-3>{
+\only<1-2>{
     \normalsize
     \onslide<1->{
         \begin{proposition}
@@ -190,14 +190,14 @@
             Pentru incluziunea $\supset$, fie $a_1b_1a_2b_2\ldots a_kb_k$ un cuvânt astfel încât $b_i \ne b_{i+1}$. Atunci putem să-i construim inversul, $b_1^{a_1}b_2^{a_2}\ldots b_k^{a_k}$.
         \end{proof}
     }
-    \onslide<3->{
+    \onslide<2->{
         \begin{obs}
         \rmfamily
         Am demonstrat că funcția $f$ este bijectivă!
         \end{obs}
     }
 }
-\only<4>{
+\only<3>{
 \begin{proposition}
 \rmfamily
 Mulțimea $\mathcal{A}$ coincide cu mulțimea cuvintelor $a_1a_2\ldots a_k$ pentru care:
@@ -261,12 +261,12 @@ for tree={
 \only<3->{
 \begin{itemize}
     \item<3-> $LS^n(S \cdot D) = LS^n(S)\cdot LS^n(D)$ % iterata
-    \item<4-> Ultima cifră a lui $LS^n(S) \ne$ prima cifră a lui $LS^n(D)$, pentru $\forall n \ge n_0$.
+    \item<3-> Ultima cifră a lui $LS^n(S) \ne$ prima cifră a lui $LS^n(D)$, pentru $\forall n \ge n_0$.
     % \item<5-> Notație: $z = x.y$ %adica z se imparte in x si y
-    \item<5-> Dacă $y$ se descompune în $x_1$, $x_2$, \ldots, $x_k$, atunci:
+    \item<4-> Dacă $y$ se descompune în $x_1$, $x_2$, \ldots, $x_k$, atunci:
     \begin{align*}
-        \onslide<5->{LS^n(y) &= \prod_{k=1}^n LS^n(x_k)}
-        \onslide<6->{\\ |LS^n(y)| &= \sum_{k=1}^n |LS^n(x_k)|}
+        \onslide<4->{LS^n(y) &= \prod_{i=1}^k LS^n(x_i)}
+        \onslide<4->{\\ |LS^n(y)| &= \sum_{i=1}^k |LS^n(x_i)|}
     \end{align*}
 \end{itemize}
 }
@@ -278,10 +278,10 @@ for tree={
 \column{0.6\textwidth}
 Rezultate:
 \begin{itemize}
-    \item<only@1> Modul în care se repetă începutul și sfârșitul numerelor dintr-un șir look-and-say
+    \item<only@1> Modul în care se repetă începutul și sfârșitul termenilor dintr-un șir look-and-say
     \item<only@2> Condiții necesare și suficiente pentru descompunere
     \item<only@3> Teoremă: \textbf{Există 92 de \textit{elemente atomice} astfel încât orice origine se descompune eventual într-o succesiune de elemente atomice} % garantat de la al 8 lea incolo % restul sunt compusi
-    \item<only@4> \textbf{Rata asimptotică de creștere a lungimii numerelor dintr-un șir look-and-say}, \\\vspace{2mm}${\displaystyle \lambda = \lim_{n\to\infty}\frac{|s_{n+1}|}{|s_n|}}$
+    \item<only@4> \textbf{Rata asimptotică de creștere a lungimii cuvintelor dintr-un șir look-and-say}, \\\vspace{2mm}${\displaystyle \lambda = \lim_{n\to\infty}\frac{|s_{n+1}|}{|s_n|}}$
 \end{itemize}
 \column{0.4\textwidth}
 \centering
@@ -293,13 +293,13 @@ Rezultate:
 \end{frame}
 
 \begin{frame}{Metodă de calcul pentru $\lambda$}
-    \only<1-3>{
+    \only<1>{
         \begin{columns}
             \column{0.5\textwidth}
                 \begin{itemize}
-                    \item<1-> $e_i$ = cele $d$ elemente atomice
-                    \item<2-> $t_{ij}$ = de câte ori apare $e_i$ în regula de evoluție a lui $e_j$ % adica descompunerea lui $LS(e_j)$
-                    \item<3-> $f_i$ = de câte ori apare $e_i$ în descompunerea originii șirului
+                    \item $e_i$ = cele $d$ elemente atomice
+                    \item $t_{ij}$ = de câte ori apare $e_i$ în regula de evoluție a lui $e_j$ % adica descompunerea lui $LS(e_j)$
+                    \item $f_i$ = de câte ori apare $e_i$ în descompunerea originii șirului
                 \end{itemize}
             \column{0.5\textwidth}
                 \centering
@@ -309,17 +309,17 @@ Rezultate:
                 \end{figure}
         \end{columns}
     }
-    \only<4-10>{
+    \only<2-8>{
         \begin{itemize}
-            \item<4-> Fie $n_0$ astfel încât $LS^{n_0}(s_0) = s_{n_0}$ se descompune în elemente atomice.
-            \onslide<5->{\begin{align*}
+            \item<2-> Fie $n_0$ astfel încât $LS^{n_0}(s_0) = s_{n_0}$ se descompune în elemente atomice.
+            \onslide<3->{\begin{align*}
              |s_{n_0+1}| &= \sum_{i = 1}^{d} (\text{nr. apariții $e_i$ în $LS(s_{n_0})$}) \cdot |e_i|
-             \only<6>{\\ &=  \sum_{i = 1}^{d} \left(\sum_{j=1}^d t_{ij}f_j\right) \cdot |e_i| }
-             \only<7-8>{\\ &=  \sum_{i = 1}^{d} \left(\textcolor{red}{\sum_{j=1}^d t_{ij}f_j}\right) \cdot |e_i| }
-             \only<9->{\\ &= (\mathbf{Tf}) \cdot \mathbf{l} = \mathbf{l}^\top(\mathbf{Tf})}
+             \only<4>{\\ &=  \sum_{i = 1}^{d} \left(\sum_{j=1}^d t_{ij}f_j\right) \cdot |e_i| }
+             \only<5-6>{\\ &=  \sum_{i = 1}^{d} \left(\textcolor{red}{\sum_{j=1}^d t_{ij}f_j}\right) \cdot |e_i| }
+             \only<7->{\\ &= (\mathbf{Tf}) \cdot \mathbf{l} = \mathbf{l}^\top(\mathbf{Tf})}
             \end{align*}
             \vspace{-4mm}
-             \only<8-9>{
+             \only<6-7>{
              \begin{columns}
                 \column{0.25\textwidth}
                     \begin{align*}
@@ -346,33 +346,33 @@ Rezultate:
              \end{columns}
              }
             }
-            \item<10->{Analog, \begin{align*}
+            \item<8->{Analog, \begin{align*}
                 |s_{n_0+k}| = (\mathbf{T}^k \mathbf{f}) \cdot \mathbf{l} = \mathbf{l}^\top(\mathbf{T}^k \mathbf{f})
             \end{align*}} % T - matricea de tranzitie
         \end{itemize}
     }
-    \only<11-15>{
+    \only<9-12>{
         \begin{itemize}
-            \item<11-> $\lambda_i$, $\mathbf{v}_i$ = valori/vectori proprii ai matricei $\mathbf{T}$ % toti, nu doar cei asociati lui lambda
-            \item<12-> $\lambda_p$, $\mathbf{v}_p$ = valoare/vector propriu Perron a matricei $\mathbf{T}$
-            \item<13-> Pentru simplitate, $n_0 = 0$.
-            \item<14-> Când $\mathbf{T}$ e diagonalizabilă,
+            \item<9-> $\lambda_i$, $\mathbf{v}_i$ = valori/vectori proprii ai matricei $\mathbf{T}$ % toti, nu doar cei asociati lui lambda
+            \item<9-> $\lambda_p$, $\mathbf{v}_p$ = valoare/vector propriu Perron a matricei $\mathbf{T}$
+            \item<10-> Pentru simplitate, $n_0 = 0$.
+            \item<11-> Când $\mathbf{T}$ e diagonalizabilă,
             \begin{align*}
                 \frac{1}{\lambda^n}\mathbf{T}^n\mathbf{f} &= \frac{1}{\lambda^n}\mathbf{T}^n\sum_{i=1}^{d}\alpha_i\mathbf{v}_i
-                \onslide<14->{\\ &= \sum_{i=1}^{d}\alpha_i\left(\frac{\lambda_i}{\lambda}\right)^n\mathbf{v}_i}
-                \onslide<15->{ \rightarrow \alpha_p \mathbf{v}_p}
+                \onslide<12->{\\ &= \sum_{i=1}^{d}\alpha_i\left(\frac{\lambda_i}{\lambda}\right)^n\mathbf{v}_i}
+                \onslide<12->{ \rightarrow \alpha_p \mathbf{v}_p}
             \end{align*} 
         \end{itemize}
     }
-    \only<16->{
+    \only<13->{
         \begin{itemize}
-            \item<16-> Acum, 
+            \item<13-> Acum, 
             \begin{align*}
-                \only<16>{\lim_{n\to\infty}\frac{|s_{n+1}|}{|s_n|} = \lim_{n\to\infty}\lambda_p\frac{\displaystyle\frac{1}{\lambda_p^{n+1}}\mathbf{T}^{n+1}\mathbf{f} \cdot \mathbf{l}}
+                \only<13>{\lim_{n\to\infty}\frac{|s_{n+1}|}{|s_n|} = \lim_{n\to\infty}\lambda_p\frac{\displaystyle\frac{1}{\lambda_p^{n+1}}\mathbf{T}^{n+1}\mathbf{f} \cdot \mathbf{l}}
                 {\displaystyle\frac{1}{\lambda_p^{n}}\mathbf{T}^{n}\mathbf{f} \cdot \mathbf{l}}}
-                \onslide<17->{\lim_{n\to\infty}\frac{|s_{n+1}|}{|s_n|} &= \lim_{n\to\infty}\lambda_p\frac{\textcolor{red}{\displaystyle\frac{1}{\lambda_p^{n+1}}\mathbf{T}^{n+1}\mathbf{f}} \cdot \mathbf{l}}
+                \onslide<14->{\lim_{n\to\infty}\frac{|s_{n+1}|}{|s_n|} &= \lim_{n\to\infty}\lambda_p\frac{\textcolor{red}{\displaystyle\frac{1}{\lambda_p^{n+1}}\mathbf{T}^{n+1}\mathbf{f}} \cdot \mathbf{l}}
                 {\displaystyle \textcolor{red}{\frac{1}{\lambda_p^{n}}\mathbf{T}^{n}\mathbf{f}} \cdot \mathbf{l}}}
-                \onslide<18->{\\ &= \lambda_p\frac{\alpha_p \mathbf{v}_p \cdot \mathbf{l}}{\alpha_p \mathbf{v}_p \cdot \mathbf{l}} \\ &= \lambda_p \approx 1.303577269034\ldots}
+                \onslide<15->{\\ &= \lambda_p\frac{\alpha_p \mathbf{v}_p \cdot \mathbf{l}}{\alpha_p \mathbf{v}_p \cdot \mathbf{l}} \\ &= \lambda_p \approx 1.303577269034\ldots}
             \end{align*}
         \end{itemize}
     }
@@ -442,6 +442,11 @@ Rezultate:
     \centering
     \includegraphics[scale=0.4]{images/proof21.png} % corectez % inegalitate in loc de egalitate la log, faptul ca incepe mereu cu 1 deci blocurile vor fi 1 0 1 0 etc., faptul ca nu trb sa continue cu bloc de 0
 }
+\only<3>{
+    \centering
+    \includegraphics[scale=0.35]{images/proof222.png} % gemini zice ca limita nu exista
+}
+
 \end{frame}
 
 \begin{frame}{$LS_{\texttt{roman}}$}
@@ -479,16 +484,51 @@ Rezultate:
 }
 \only<3>{
     \begin{tabular}{rl}
-    1. &i\\
-    5. &ivi\\
-    9. &iviiiiviii\\
-    13. &iviiiivviiviiiviiiiviiiiiviii\\
-    17. &iviiiivviiiviiiiviiiiivviivviiviiiviiiivviiviiiviiiiiviiiivivi\\
-    21. &iviiiivviiiviiiiiviviivviiiviiiiiviiiiiviviiviiiiivviiviviivv\ldots\\
-    25. &iviiiivviiiviiiiivviiviiiviiiiiviiiiivviivviiiviiiiviiiviiiii\ldots\\
-    29. &iviiiivviiiviiiiivviiiviiiiviiiiivviivviiiviiiiiviiiiivviiviv\ldots\\
-    33. &iviiiivviiiviiiiivviiiviiiiiviviivviiiviiiiiviiiiivviivviiivi\ldots\\
+        1. &i\\
+        5. &ivi\\
+        9. &iviiiiviii\\
+        13. &iviiiivviiviiiviiiiviiiiiviii\\
+        17. &iviiiivviiiviiiiviiiiivviivviiviiiviiiivviiviiiviiiiiviiiivivi\\
+        21. &iviiiivviiiviiiiiviviivviiiviiiiiviiiiiviviiviiiiivviiviviivv\ldots\\
+        25. &iviiiivviiiviiiiivviiviiiviiiiiviiiiivviivviiiviiiiviiiviiiii\ldots\\
+        29. &iviiiivviiiviiiiivviiiviiiiviiiiivviivviiiviiiiiviiiiivviiviv\ldots\\
+        33. &iviiiivviiiviiiiivviiiviiiiiviviivviiiviiiiiviiiiivviivviiivi\ldots\\
     \end{tabular}
+}
+\only<4>{
+    \begin{tabular}{rl}
+        1. &\textcolor{red}{i}\\
+        5. &\textcolor{red}{ivi}\\
+        9. &\textcolor{red}{iviiii}viii\\
+        13. &\textcolor{red}{iviiiivv}iiviiiviiiiviiiiiviii\\
+        17. &\textcolor{red}{iviiiivviiiv}iiiiviiiiivviivviiviiiviiiivviiviiiviiiiiviiiivivi\\
+        21. &\textcolor{red}{iviiiivviiiviiiii}viviivviiiviiiiiviiiiiviviiviiiiivviiviviivv\ldots\\
+        25. &\textcolor{red}{iviiiivviiiviiiiivv}iiviiiviiiiiviiiiivviivviiiviiiiviiiviiiii\ldots\\
+        29. &\textcolor{red}{iviiiivviiiviiiiivviiiv}iiiiviiiiivviivviiiviiiiiviiiiivviiviv\ldots\\
+        33. &\textcolor{red}{iviiiivviiiviiiiivviiiv}iiiiiviviivviiiviiiiiviiiiivviivviiivi\ldots\\
+    \end{tabular}
+}
+\only<5>{
+    \centering
+    \includegraphics[scale=0.5]{images/proof31.png} % primele 2 incercari empirice, apoi o demonstratie riguroasa dar nu stiu daca e ok? de multe ori zice analizam pe cazuri fara sa faca el analiza pe cazuri, uneori incorect
+}
+\only<6>{
+    \centering
+    \includegraphics[scale=0.6]{images/prompt24.png}
+}
+\only<7>{
+    \centering
+    \includegraphics[scale=0.35]{images/proof25.png} % demonstreaza ok
+}
+\end{frame}
+
+\begin{frame}{$LS_{\texttt{sng}}$}
+\only<1>{
+$LS_{\texttt{sng}}$: 333221, 33221, 23221, 23221, 23221, \ldots
+}
+\only<2>{
+    \centering
+    \includegraphics[scale=0.375]{images/proof41.png}
 }
 \end{frame}
 \section{Vă mulțumim!}
